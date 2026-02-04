@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wrong choice</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="title">Try again</div>
+        <a class="chip" href="ask.html" data-nav="ask.html">Back</a>
+      </div>
+    </div>
+
+    <main class="main">
+      <section class="card">
+        <div class="card-inner">
+          <div class="grid">
+            <div>
+              <h1 class="h1">you made the wrong choice</h1>
+              <p class="sub" id="hint">Pick again.</p>
+
+              <div class="gallery">
+                <div class="tile"><img src="assets/kuromi-wrong-1.gif" alt="Kuromi" /></div>
+                <div class="tile"><img src="assets/kuromi-wrong-2.gif" alt="Kuromi" /></div>
+                <div class="tile"><img src="assets/kuromi-wrong-3.gif" alt="Kuromi" /></div>
+                <div class="tile"><img src="assets/kuromi-wrong-4.gif" alt="Kuromi" /></div>
+              </div>
+
+              <div class="scale-wrap">
+                <button class="btn btn-pink" id="yesBtn" data-nav="yes.html" data-confetti="true">Yes</button>
+                <button class="btn btn-black" id="noBtn" type="button">No</button>
+              </div>
+            </div>
+
+            <div class="hero-media">
+              <img src="assets/kuromi-wrong-1.gif" alt="Kuromi" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="fine">
+        <span>No is not an option</span>
+        <span>Nelson Lim</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="effects.js"></script>
+  <script>
+    var yesBtn = document.getElementById("yesBtn");
+    var noBtn = document.getElementById("noBtn");
+    var hint = document.getElementById("hint");
+
+    var noClicks = 0;
+    var maxClicks = 5;
+
+    function applyScales() {
+      var yesScale = 1 + (noClicks * 0.22);
+      var noScale = Math.max(0.18, 1 - (noClicks * 0.18));
+
+      yesBtn.style.transform = "scale(" + yesScale.toFixed(2) + ")";
+      noBtn.style.transform = "scale(" + noScale.toFixed(2) + ")";
+    }
+
+    noBtn.addEventListener("click", function () {
+      noClicks += 1;
+
+      if (noClicks >= maxClicks) {
+        noBtn.style.display = "none";
+        hint.textContent = "Only one option left.";
+        yesBtn.style.transform = "scale(2.10)";
+        return;
+      }
+
+      applyScales();
+
+      var left = maxClicks - noClicks;
+      hint.textContent = left === 1 ? "One more try." : left + " tries left.";
+    });
+
+    applyScales();
+  </script>
+</body>
+</html>
