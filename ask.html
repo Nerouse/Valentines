@@ -1,27 +1,51 @@
-
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Be My Valentine</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valentine?</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
 </head>
 <body>
-  <div class="container">
-    <h1 class="bubble-text">Will You Be My Valentine?</h1>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="title">Question</div>
+        <a class="chip" href="index.html" data-nav="index.html">Back</a>
+      </div>
+    </div>
 
-    <a href="yes.html"><button>Yes</button></a>
-    <button id="noBtn">No</button>
+    <main class="main">
+      <section class="card">
+        <div class="card-inner">
+          <div class="grid">
+            <div>
+              <h1 class="h1">Will You Be My Valentine</h1>
+              <p class="sub">Pick your answer.</p>
+
+              <div class="actions">
+                <button class="btn btn-pink" data-nav="yes.html" data-confetti="true">Yes</button>
+                <button class="btn btn-black" data-nav="no.html">No</button>
+              </div>
+            </div>
+
+            <div class="hero-media">
+              <img src="assets/kuromi-ask.gif" alt="Kuromi" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="fine">
+        <span>Answer time</span>
+        <span>Nelson Lim</span>
+      </div>
+    </div>
   </div>
 
-  <script>
-    const btn = document.getElementById("noBtn");
-    btn.addEventListener("click", () => {
-      const maxX = window.innerWidth - btn.offsetWidth;
-      const maxY = window.innerHeight - btn.offsetHeight;
-      btn.style.left = Math.random() * maxX + "px";
-      btn.style.top = Math.random() * maxY + "px";
-    });
-  </script>
+  <script src="effects.js"></script>
 </body>
 </html>
