@@ -159,7 +159,7 @@ img{max-width:100%;height:auto;display:block}
   background: linear-gradient(120deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
   mix-blend-mode:overlay; animation: shimmer 2400ms linear infinite;
 }
-@keyframes shimmer{0%{transform:translateX(-30%)} 100%{transform:translateX(30%)}}
+@keyframes shimmer{0%{transform:translateX(-120%)} 100%{transform:translateX(120%)}}
 
 .sub{
   margin:0 0 18px;
@@ -188,6 +188,7 @@ img{max-width:100%;height:auto;display:block}
   gap:12px;
   flex-wrap:wrap;
   margin-top:14px;
+  justify-content:center;
 }
 
 .btn{
@@ -421,14 +422,22 @@ img{max-width:100%;height:auto;display:block}
 /* Button scaling for the no page */
 .scale-wrap{
   display:flex;
-  gap:12px;
+  gap:18px;
   flex-wrap:wrap;
   align-items:center;
-  margin-top:14px;
+  justify-content:center;
+  margin-top:18px;
 }
 
 .scale-wrap .btn{
   transform-origin:center;
+}
+
+/* Larger, centered buttons for choice pages */
+.scale-wrap .btn,
+.actions .btn{
+  padding:14px 22px;
+  font-size:16px;
 }
 
 /* Hearts and confetti overlay */
