@@ -51,27 +51,28 @@
       var hint = document.getElementById("hint");
 
       function moveNoButton() {
-        // constrain movement to the visible card-inner area so the button never exits
-        var container = document.querySelector('.card-inner') || document.querySelector('.card') || document.body;
-        var rect = container.getBoundingClientRect();
+        // constrain movement to the left column containing the buttons (the parent of .scale-wrap)
+        var scaleWrap = noBtn.closest('.scale-wrap');
+        var columnContainer = (scaleWrap && scaleWrap.parentElement) || document.querySelector('.card-inner') || document.querySelector('.card') || document.body;
+        var rect = columnContainer.getBoundingClientRect();
 
         var bw = noBtn.offsetWidth;
         var bh = noBtn.offsetHeight;
 
         var padding = 12; // space from container edges
 
-        // compute min/max so the full button stays inside the container
+        // compute min/max so the full button stays inside the column container
         var minLeft = rect.left + padding;
         var maxLeft = rect.left + rect.width - bw - padding;
         var minTop = rect.top + padding;
         var maxTop = rect.top + rect.height - bh - padding;
 
-        // fallbacks if container is too small
+        // if the container is too small, center the button horizontally/vertically inside it
         if (maxLeft < minLeft) { minLeft = maxLeft = rect.left + Math.max((rect.width - bw) / 2, 0); }
         if (maxTop < minTop) { minTop = maxTop = rect.top + Math.max((rect.height - bh) / 2, 0); }
 
-        var left = Math.floor(minLeft + Math.random() * (maxLeft - minLeft));
-        var top = Math.floor(minTop + Math.random() * (maxTop - minTop));
+        var left = Math.floor(minLeft + Math.random() * Math.max(1, (maxLeft - minLeft)));
+        var top = Math.floor(minTop + Math.random() * Math.max(1, (maxTop - minTop)));
 
         noBtn.style.position = 'fixed';
         noBtn.style.left = left + 'px';
@@ -80,19 +81,26 @@
       }
 
       function clampNoButtonToContainer() {
-        var container = document.querySelector('.card-inner') || document.querySelector('.card') || document.body;
-        var rect = container.getBoundingClientRect();
+        var scaleWrap = noBtn.closest('.scale-wrap');
+        var columnContainer = (scaleWrap && scaleWrap.parentElement) || document.querySelector('.card-inner') || document.querySelector('.card') || document.body;
+        var rect = columnContainer.getBoundingClientRect();
         var bw = noBtn.offsetWidth;
         var bh = noBtn.offsetHeight;
         var padding = 12;
 
-        var left = parseInt(noBtn.style.left || 0, 10);
-        var top = parseInt(noBtn.style.top || 0, 10);
+        var left = parseFloat(noBtn.style.left || 0);
+        var top = parseFloat(noBtn.style.top || 0);
 
         var minLeft = rect.left + padding;
         var maxLeft = rect.left + rect.width - bw - padding;
         var minTop = rect.top + padding;
         var maxTop = rect.top + rect.height - bh - padding;
+
+        if (maxLeft < minLeft) { minLeft = maxLeft = rect.left + Math.max((rect.width - bw) / 2, 0); }
+        if (maxTop < minTop) { minTop = maxTop = rect.top + Math.max((rect.height - bh) / 2, 0); }
+
+        if (isNaN(left)) left = minLeft;
+        if (isNaN(top)) top = minTop;
 
         if (left < minLeft) left = minLeft;
         if (left > maxLeft) left = maxLeft;
