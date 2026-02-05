@@ -51,35 +51,72 @@
       var hint = document.getElementById("hint");
 
       function moveNoButton() {
-        // constrain movement to the visible card area
-        var container = document.querySelector('.card') || document.body;
+        // constrain movement to the visible card-inner area so the button never exits
+        var container = document.querySelector('.card-inner') || document.querySelector('.card') || document.body;
         var rect = container.getBoundingClientRect();
 
         var bw = noBtn.offsetWidth;
         var bh = noBtn.offsetHeight;
 
-        var padding = 12;
-        var maxLeft = Math.max(rect.width - bw - padding * 2, 0);
-        var maxTop = Math.max(rect.height - bh - padding * 2, 0);
+        var padding = 12; // space from container edges
 
-        var left = Math.floor(rect.left + padding + Math.random() * maxLeft);
-        var top = Math.floor(rect.top + padding + Math.random() * maxTop);
+        // compute min/max so the full button stays inside the container
+        var minLeft = rect.left + padding;
+        var maxLeft = rect.left + rect.width - bw - padding;
+        var minTop = rect.top + padding;
+        var maxTop = rect.top + rect.height - bh - padding;
+
+        // fallbacks if container is too small
+        if (maxLeft < minLeft) { minLeft = maxLeft = rect.left + Math.max((rect.width - bw) / 2, 0); }
+        if (maxTop < minTop) { minTop = maxTop = rect.top + Math.max((rect.height - bh) / 2, 0); }
+
+        var left = Math.floor(minLeft + Math.random() * (maxLeft - minLeft));
+        var top = Math.floor(minTop + Math.random() * (maxTop - minTop));
 
         noBtn.style.position = 'fixed';
         noBtn.style.left = left + 'px';
         noBtn.style.top = top + 'px';
+        noBtn.style.zIndex = 10003;
+      }
+
+      function clampNoButtonToContainer() {
+        var container = document.querySelector('.card-inner') || document.querySelector('.card') || document.body;
+        var rect = container.getBoundingClientRect();
+        var bw = noBtn.offsetWidth;
+        var bh = noBtn.offsetHeight;
+        var padding = 12;
+
+        var left = parseInt(noBtn.style.left || 0, 10);
+        var top = parseInt(noBtn.style.top || 0, 10);
+
+        var minLeft = rect.left + padding;
+        var maxLeft = rect.left + rect.width - bw - padding;
+        var minTop = rect.top + padding;
+        var maxTop = rect.top + rect.height - bh - padding;
+
+        if (left < minLeft) left = minLeft;
+        if (left > maxLeft) left = maxLeft;
+        if (top < minTop) top = minTop;
+        if (top > maxTop) top = maxTop;
+
+        noBtn.style.left = Math.floor(left) + 'px';
+        noBtn.style.top = Math.floor(top) + 'px';
       }
 
       noBtn.addEventListener('click', function (e){
         e.preventDefault();
         moveNoButton();
-        hint.textContent = "It moved again!";
+        if (hint) hint.textContent = "It moved again!";
       });
 
-      // ensure initial position next to Yes button
+      // ensure initial position next to Yes button and keep in bounds on resize
       window.addEventListener('load', function(){
-        // don't hide, just nudge it
         moveNoButton();
+        clampNoButtonToContainer();
+      });
+
+      window.addEventListener('resize', function(){
+        clampNoButtonToContainer();
       });
     })();
   </script>

@@ -193,14 +193,6 @@ img{max-width:100%;height:auto;display:block}
   justify-content:center;
 }
 
-/* make the Start over / actions ghost button pink to match theme */
-.actions .btn-ghost{
-  background: linear-gradient(180deg, var(--pink2), var(--pink));
-  color: #ffffff;
-  border: none;
-  box-shadow: 0 10px 20px rgba(255,77,166,0.22);
-}
-
 .btn{
   appearance:none;
   border:0;
