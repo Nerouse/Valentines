@@ -18,22 +18,7 @@
 
     <main class="main">
       <section class="scene">
-        <svg class="arched" viewBox="0 0 800 160" role="img" aria-label="You have mail">
-          <defs>
-            <linearGradient id="g-pink" x1="0" x2="1">
-              <stop offset="0%" stop-color="#ff78c6" />
-              <stop offset="100%" stop-color="#ff4da6" />
-            </linearGradient>
-            <filter id="bubble" x="-20%" y="-40%" width="140%" height="180%">
-              <feGaussianBlur stdDeviation="4" result="b" />
-              <feComposite in="SourceGraphic" in2="b" operator="over" />
-            </filter>
-          </defs>
-          <path id="arc1" d="M40,120 A360,120 0 0,1 760,120" fill="none" />
-          <text class="arched-text" filter="url(#bubble)">
-            <textPath href="#arc1" startOffset="50%" text-anchor="middle">You have mail</textPath>
-          </text>
-        </svg>
+        <h1 class="h1 bubble holo">You have mail</h1>
         <p class="sub">Open the envelope.</p>
 
         <div class="envelope-wrap">
