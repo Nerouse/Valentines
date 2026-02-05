@@ -22,13 +22,10 @@
           <div class="grid">
             <div>
               <h1 class="h1">you made the wrong choice</h1>
-              <p class="sub" id="hint">Pick again.</p>
+              <p class="sub" id="hint">Try again — but the No button doesn't like to be clicked.</p>
 
-              <div class="gallery">
+              <div class="gallery single">
                 <div class="tile"><img src="assets/kuromi-wrong-1.gif" alt="Kuromi" /></div>
-                <div class="tile"><img src="assets/kuromi-wrong-2.gif" alt="Kuromi" /></div>
-                <div class="tile"><img src="assets/kuromi-wrong-3.gif" alt="Kuromi" /></div>
-                <div class="tile"><img src="assets/kuromi-wrong-4.gif" alt="Kuromi" /></div>
               </div>
 
               <div class="scale-wrap">
@@ -53,40 +50,40 @@
     </div>
   </div>
 
-  <script src="effects.js"></script>
+    <script src="effects.js"></script>
   <script>
-    var yesBtn = document.getElementById("yesBtn");
-    var noBtn = document.getElementById("noBtn");
-    var hint = document.getElementById("hint");
+    (function (){
+      var yesBtn = document.getElementById("yesBtn");
+      var noBtn = document.getElementById("noBtn");
+      var hint = document.getElementById("hint");
 
-    var noClicks = 0;
-    var maxClicks = 5;
+      function moveNoButton() {
+        var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        var bw = noBtn.offsetWidth;
+        var bh = noBtn.offsetHeight;
 
-    function applyScales() {
-      var yesScale = 1 + (noClicks * 0.22);
-      var noScale = Math.max(0.18, 1 - (noClicks * 0.18));
+        var padding = 12;
+        var left = Math.floor(padding + Math.random() * (vw - bw - padding*2));
+        var top = Math.floor(padding + Math.random() * (vh - bh - padding*2));
 
-      yesBtn.style.transform = "scale(" + yesScale.toFixed(2) + ")";
-      noBtn.style.transform = "scale(" + noScale.toFixed(2) + ")";
-    }
-
-    noBtn.addEventListener("click", function () {
-      noClicks += 1;
-
-      if (noClicks >= maxClicks) {
-        noBtn.style.display = "none";
-        hint.textContent = "Only one option left.";
-        yesBtn.style.transform = "scale(2.10)";
-        return;
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = left + 'px';
+        noBtn.style.top = top + 'px';
       }
 
-      applyScales();
+      noBtn.addEventListener('click', function (e){
+        e.preventDefault();
+        moveNoButton();
+        hint.textContent = "It moved again!";
+      });
 
-      var left = maxClicks - noClicks;
-      hint.textContent = left === 1 ? "One more try." : left + " tries left.";
-    });
-
-    applyScales();
+      // ensure initial position next to Yes button
+      window.addEventListener('load', function(){
+        // don't hide, just nudge it
+        moveNoButton();
+      });
+    })();
   </script>
 </body>
 </html>

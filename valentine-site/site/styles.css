@@ -1,9 +1,9 @@
 :root{
-  --bg1:#fff0f6;
-  --bg2:#ffe3ef;
+  --bg1:#0b0010;
+  --bg2:#1b0026;
   --pink:#ff4da6;
   --pink2:#ff78c6;
-  --black:#111111;
+  --black:#ffffff;
   --card:#ffffff;
   --stroke:rgba(17,17,17,0.10);
   --shadow: 0 18px 50px rgba(17,17,17,0.14);
@@ -21,9 +21,9 @@ body{
   margin:0;
   font-family:var(--font);
   color:var(--black);
-  background: radial-gradient(1200px 800px at 20% 10%, var(--bg2), transparent 60%),
-              radial-gradient(900px 700px at 80% 30%, #ffeef8, transparent 55%),
-              linear-gradient(180deg, var(--bg1), #ffffff);
+  background: radial-gradient(900px 600px at 10% 10%, rgba(255,77,166,0.06), transparent 30%),
+              radial-gradient(800px 450px at 90% 80%, rgba(255,120,198,0.04), transparent 40%),
+              linear-gradient(180deg, var(--bg1), var(--bg2));
   animation: page-in 220ms ease-out both;
 }
 
@@ -110,6 +110,27 @@ img{max-width:100%;height:auto;display:block}
   line-height:1.08;
   letter-spacing:-0.6px;
 }
+
+/* Arched SVG heading styling */
+.arched{display:block; width:min(820px,92vw); height:auto; margin:6px auto 8px; position:relative}
+.arched .arched-text{font-family:var(--font); font-weight:900; font-size:42px; fill:url(#g-pink); stroke: rgba(255,255,255,0.28); stroke-width:3px; paint-order:stroke;}
+.arched.holo .arched-text{fill:url(#g-pink2); mix-blend-mode:screen}
+.arched .arched-text{filter: drop-shadow(0 8px 22px rgba(0,0,0,0.45));}
+.arched .arched-text{transform-origin:50% 50%; animation: float 3200ms ease-in-out infinite;}
+
+@keyframes float{
+  0%{transform:translateY(0) rotate(-0.2deg)}
+  50%{transform:translateY(-8px) rotate(0.3deg)}
+  100%{transform:translateY(0) rotate(-0.2deg)}
+}
+
+/* holographic shimmer overlay for headings */
+.holo::after{
+  content:""; position:absolute; pointer-events:none; left:-10%; right:-10%; top:0; bottom:0; margin:auto; height:140px; width:120%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.06), rgba(255,255,255,0.18), rgba(255,255,255,0.06));
+  mix-blend-mode:overlay; animation: shimmer 2400ms linear infinite;
+}
+@keyframes shimmer{0%{transform:translateX(-30%)} 100%{transform:translateX(30%)}}
 
 .sub{
   margin:0 0 18px;
@@ -316,17 +337,19 @@ img{max-width:100%;height:auto;display:block}
 
 .tile{
   border-radius:16px;
-  border:1px solid var(--stroke);
-  background: rgba(255,255,255,0.7);
+  border:1px solid rgba(255,255,255,0.06);
+  background: rgba(255,255,255,0.04);
   overflow:hidden;
-  box-shadow: 0 10px 22px rgba(17,17,17,0.10);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.45);
 }
 
 .tile img{
   width:100%;
-  height:220px;
+  height:260px;
   object-fit:cover;
 }
+
+.gallery.single .tile img{height:360px}
 
 /* Invite page */
 .invite{
@@ -468,6 +491,10 @@ img{max-width:100%;height:auto;display:block}
     transform: translateX(var(--dx)) translateY(-86vh) rotate(-45deg) scale(1.06);
   }
 }
+
+/* final expanding heart used for dramatic page transitions */
+.fx-final-heart{position:absolute; left:50%; top:50%; width:120px; height:120px; transform:translate(-50%,-50%) scale(0.04); background: radial-gradient(circle at 30% 20%, #ff78c6, #ff4da6); border-radius:36px; mix-blend-mode:screen; transition:transform 700ms cubic-bezier(.2,.9,.2,1); pointer-events:none; z-index:10002}
+.fx-final-heart.expand{transform:translate(-50%,-50%) scale(60); border-radius:0}
 
 #fx-confetti{
   position:absolute;

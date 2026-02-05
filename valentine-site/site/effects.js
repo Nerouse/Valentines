@@ -41,9 +41,9 @@
       h.className = "fx-heart";
 
       var left = Math.random() * 100;
-      var size = 16 + Math.random() * 22;
+      var size = 8 + Math.random() * 28;
       var delay = Math.random() * 0.18;
-      var dur = 0.55 + Math.random() * 0.35;
+      var dur = 0.9 + Math.random() * 0.7;
       var drift = (Math.random() * 2 - 1) * 26;
       var tint = Math.random() < 0.75 ? "pink" : "black";
 
@@ -72,7 +72,7 @@
     var layer = qs("#fx-confetti", overlay);
     clearLayer("#fx-confetti");
 
-    var count = (opts && opts.count) || 140;
+    var count = (opts && opts.count) || 180;
     var colors = ["#ff4da6", "#ff78c6", "#111111"]; 
 
     for (var i = 0; i < count; i += 1) {
@@ -107,17 +107,29 @@
       overlay.classList.remove("confetti");
       clearLayer("#fx-confetti");
       if (!overlay.classList.contains("hearts")) overlay.classList.remove("active");
-    }, 1400);
+    }, 1600);
   }
 
   function navigateWithHearts(url, opts) {
     var o = opts || {};
-    if (o.confetti) spawnConfetti({ count: 160 });
-    spawnHearts({ count: 20 });
+    if (o.confetti) spawnConfetti({ count: 220 });
+    spawnHearts({ count: 40 });
+
+    // dramatic final heart: expand a single heart to cover screen
+    var overlay = ensureOverlay();
+    var layer = qs("#fx-hearts", overlay);
+    var final = document.createElement('div');
+    final.className = 'fx-final-heart';
+    overlay.appendChild(final);
+    overlay.classList.add('active');
+    // allow animation then navigate
+    window.setTimeout(function () {
+      final.classList.add('expand');
+    }, 280);
 
     window.setTimeout(function () {
       window.location.href = url;
-    }, 650);
+    }, 1050);
   }
 
   function bindNav() {

@@ -25,7 +25,23 @@
               <span>Reserved for you</span>
             </div>
 
-            <h1 class="h1">You are Invited to the residence of Nelson Lim</h1>
+            <svg class="arched holo" viewBox="0 0 1000 160" role="img" aria-label="You are invited">
+              <defs>
+                <linearGradient id="g-pink3" x1="0" x2="1">
+                  <stop offset="0%" stop-color="#ffd6ea" />
+                  <stop offset="50%" stop-color="#ff78c6" />
+                  <stop offset="100%" stop-color="#ff4da6" />
+                </linearGradient>
+                <filter id="bubble3" x="-20%" y="-40%" width="140%" height="180%">
+                  <feGaussianBlur stdDeviation="4" result="b" />
+                  <feComposite in="SourceGraphic" in2="b" operator="over" />
+                </filter>
+              </defs>
+              <path id="arc3" d="M40,120 A420,120 0 0,1 960,120" fill="none" />
+              <text class="arched-text" filter="url(#bubble3)">
+                <textPath href="#arc3" startOffset="50%" text-anchor="middle">You are Invited to the residence of Nelson Lim</textPath>
+              </text>
+            </svg>
             <p class="sub">Menu below.</p>
 
             <div class="menu">
