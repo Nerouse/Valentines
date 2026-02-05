@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Wrong choice</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="title">Try again</div>
+        <a class="chip" href="ask.html" data-nav="ask.html">Back</a>
+      </div>
+    </div>
+
+    <main class="main">
+      <section class="card">
+        <div class="card-inner">
+          <div class="grid">
+            <div>
+              <h1 class="h1">you made the wrong choice</h1>
+              <p class="sub" id="hint">Try again — but the No button doesn't like to be clicked.</p>
+
+              <div class="gallery single">
+                <div class="tile"><img src="assets/kuromi-wrong-1.gif" alt="Kuromi" /></div>
+              </div>
+
+              <div class="scale-wrap">
+                <button class="btn btn-pink" id="yesBtn" data-nav="yes.html" data-confetti="true">Yes</button>
+                <button class="btn btn-black" id="noBtn" type="button">No</button>
+              </div>
+            </div>
+
+            <div class="hero-media">
+              <img src="assets/kuromi-wrong-1.gif" alt="Kuromi" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="fine">
+        <span>No is not an option</span>
+        <span>Nelson Lim</span>
+      </div>
+    </div>
+  </div>
+
+    <script src="effects.js"></script>
+  <script>
+    (function (){
+      var yesBtn = document.getElementById("yesBtn");
+      var noBtn = document.getElementById("noBtn");
+      var hint = document.getElementById("hint");
+
+      function moveNoButton() {
+        var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+        var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        var bw = noBtn.offsetWidth;
+        var bh = noBtn.offsetHeight;
+
+        var padding = 12;
+        var left = Math.floor(padding + Math.random() * (vw - bw - padding*2));
+        var top = Math.floor(padding + Math.random() * (vh - bh - padding*2));
+
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = left + 'px';
+        noBtn.style.top = top + 'px';
+      }
+
+      noBtn.addEventListener('click', function (e){
+        e.preventDefault();
+        moveNoButton();
+        hint.textContent = "It moved again!";
+      });
+
+      // ensure initial position next to Yes button
+      window.addEventListener('load', function(){
+        // don't hide, just nudge it
+        moveNoButton();
+      });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>For You</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="assets/favicon.png" />
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand">
+        <div class="title">A note for you</div>
+        <div class="chip">Tap the heart</div>
+      </div>
+    </div>
+
+    <main class="main">
+      <section class="scene">
+        <svg class="arched" viewBox="0 0 800 160" role="img" aria-label="You have mail">
+          <defs>
+            <linearGradient id="g-pink" x1="0" x2="1">
+              <stop offset="0%" stop-color="#ff78c6" />
+              <stop offset="100%" stop-color="#ff4da6" />
+            </linearGradient>
+            <filter id="bubble" x="-20%" y="-40%" width="140%" height="180%">
+              <feGaussianBlur stdDeviation="4" result="b" />
+              <feComposite in="SourceGraphic" in2="b" operator="over" />
+            </filter>
+          </defs>
+          <path id="arc1" d="M40,120 A360,120 0 0,1 760,120" fill="none" />
+          <text class="arched-text" filter="url(#bubble)">
+            <textPath href="#arc1" startOffset="50%" text-anchor="middle">You have mail</textPath>
+          </text>
+        </svg>
+        <p class="sub">Open the envelope.</p>
+
+        <div class="envelope-wrap">
+          <div class="envelope" id="envelope">
+            <div class="flap"></div>
+            <div class="pocket"></div>
+
+            <button class="heart-btn" id="openHeart" aria-label="Open">
+              <span class="heart" aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="footer">
+      <div class="fine">
+        <span>Made with love</span>
+        <span>Nelson Lim</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="effects.js"></script>
+  <script>
+    document.addEventListener("click", function (e) {
+      var btn = e.target.closest("#openHeart");
+      if (!btn) return;
+
+      var envelope = document.getElementById("envelope");
+      envelope.classList.add("open");
+
+      window.setTimeout(function () {
+        window.FX.navigateWithHearts("ask.html");
+      }, 520);
+    });
+  </script>
+</body>
+</html>

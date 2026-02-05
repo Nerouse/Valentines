@@ -4,13 +4,15 @@ How to add your images and gifs
 
 Put your files in the assets folder and use these exact names.
 
-assets/kuromi-ask.gif
-assets/kuromi-wrong-1.gif
-assets/kuromi-wrong-2.gif
-assets/kuromi-wrong-3.gif
-assets/kuromi-wrong-4.gif
-assets/menu.png
-assets/favicon.png
+Required asset filenames (place these in the `assets/` folder):
+
+- assets/kuromi-ask.gif
+- assets/kuromi-wrong-1.gif
+- assets/kuromi-wrong-2.gif
+- assets/kuromi-wrong-3.gif
+- assets/kuromi-wrong-4.gif
+- assets/menu.png
+- assets/favicon.png
 
 Deploy on GitHub Pages
 
