@@ -166,6 +166,8 @@ img{max-width:100%;height:auto;display:block}
   font-size:16px;
   line-height:1.6;
   opacity:0.82;
+  text-align:center;
+  color: var(--pink);
 }
 
 .hero-media{
@@ -399,6 +401,9 @@ img{max-width:100%;height:auto;display:block}
   width:fit-content;
   box-shadow: 0 10px 22px rgba(17,17,17,0.08);
 }
+
+/* make the badge text pink to highlight Reserved for you */
+.badge{color: var(--pink)}
 
 .dot{
   width:10px;height:10px;border-radius:999px;

@@ -41,8 +41,8 @@
 
     <div class="footer">
       <div class="fine">
-        <span>No is not an option</span>
-        <span>Nelson Lim</span>
+        <span>no is not an option :)</span>
+
       </div>
     </div>
   </div>
@@ -55,14 +55,19 @@
       var hint = document.getElementById("hint");
 
       function moveNoButton() {
-        var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
-        var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0);
+        // constrain movement to the visible card area
+        var container = document.querySelector('.card') || document.body;
+        var rect = container.getBoundingClientRect();
+
         var bw = noBtn.offsetWidth;
         var bh = noBtn.offsetHeight;
 
         var padding = 12;
-        var left = Math.floor(padding + Math.random() * (vw - bw - padding*2));
-        var top = Math.floor(padding + Math.random() * (vh - bh - padding*2));
+        var maxLeft = Math.max(rect.width - bw - padding * 2, 0);
+        var maxTop = Math.max(rect.height - bh - padding * 2, 0);
+
+        var left = Math.floor(rect.left + padding + Math.random() * maxLeft);
+        var top = Math.floor(rect.top + padding + Math.random() * maxTop);
 
         noBtn.style.position = 'fixed';
         noBtn.style.left = left + 'px';
