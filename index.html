@@ -1,59 +1,29 @@
-<!doctype html>
-<html lang="en">
+
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>For You</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>You Have Mail</title>
 </head>
 <body>
-  <div class="wrap">
-    <div class="topbar">
-      <div class="brand">
-        <div class="title">To My Baby Girl</div>
-        <div class="chip">Tap the heart</div>
-      </div>
-    </div>
-
-    <main class="main">
-      <section class="scene">
-        <h1 class="h1">You have mail</h1>
-
-        <div class="envelope-wrap">
-          <div class="envelope" id="envelope">
-            <div class="flap"></div>
-            <div class="pocket"></div>
-
-            <button class="heart-btn" id="openHeart" aria-label="Open">
-              <span class="heart" aria-hidden="true"></span>
-            </button>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <div class="footer">
-      <div class="fine">
-        <span>Made with love</span>
-        <span>Nelson Lim</span>
-      </div>
-    </div>
+  <div class="heart-bg">
+    <span class="heart" style="left:10%;">❤</span>
+    <span class="heart" style="left:30%; animation-delay:2s;">❤</span>
+    <span class="heart" style="left:60%; animation-delay:4s;">❤</span>
+    <span class="heart" style="left:80%; animation-delay:1s;">❤</span>
   </div>
 
-  <script src="effects.js"></script>
-  <script>
-    document.addEventListener("click", function (e) {
-      var btn = e.target.closest("#openHeart");
-      if (!btn) return;
+  <div class="container">
+    <h1 class="bubble-arch">
+      <span>Y</span><span>O</span><span>U</span><span> </span>
+      <span>H</span><span>A</span><span>V</span><span>E</span><span> </span>
+      <span>M</span><span>A</span><span>I</span><span>L</span>
+    </h1>
 
-      var envelope = document.getElementById("envelope");
-      envelope.classList.add("open");
-
-      window.setTimeout(function () {
-        window.FX.navigateWithHearts("ask.html");
-      }, 520);
-    });
-  </script>
+    <a href="ask.html">
+      <button>Open</button>
+    </a>
+  </div>
 </body>
 </html>
